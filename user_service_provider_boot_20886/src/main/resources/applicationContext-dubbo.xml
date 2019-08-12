@@ -1,0 +1,21 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="user_service_provider"/>
+    <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper"/>
+    <dubbo:protocol name="dubbo" port="20886"/>
+
+    <!--发布服务-->
+    <dubbo:service interface="net.sunnada.service.UserService" ref="userServiceImpl">
+        <dubbo:method name="getUserAddressList"/>
+    </dubbo:service>
+    <bean id="userServiceImpl" class="net.sunnada.service.impl.UserServiceImpl"/>
+
+    <!--表示从注册中心发现监控中心地址-->
+    <dubbo:monitor protocol="registry"/>
+</beans>

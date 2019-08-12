@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.sunnada.mapper.LicenseMapper">
+    <resultMap id="BaseResultMap" type="net.sunnada.pojo.License">
+        <id column="ID" jdbcType="DECIMAL" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="OWNERTYPE" jdbcType="DECIMAL" property="ownertype"/>
+        <result column="TABLENAME" jdbcType="VARCHAR" property="tablename"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="SERIALNUMBERFORMAT" jdbcType="VARCHAR" property="serialnumberformat"/>
+        <result column="SERIALNUMBERFORMATREGEX" jdbcType="VARCHAR" property="serialnumberformatregex"/>
+        <result column="CATEGORY" jdbcType="DECIMAL" property="category"/>
+        <result column="ORGANIZATIONID" jdbcType="VARCHAR" property="organizationid"/>
+        <result column="PRINTPAGEINDEXS" jdbcType="VARCHAR" property="printpageindexs"/>
+        <result column="VERSIONS" jdbcType="VARCHAR" property="versions"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="UPDATEUSER" jdbcType="VARCHAR" property="updateuser"/>
+        <result column="AUTOSERIALNUMBER" jdbcType="DECIMAL" property="autoserialnumber"/>
+        <result column="TRANSPARENTSEAL" jdbcType="DECIMAL" property="transparentseal"/>
+        <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime"/>
+        <result column="ORGANIZATIONNAME" jdbcType="VARCHAR" property="organizationname"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <result column="FLAGS" jdbcType="DECIMAL" property="flags"/>
+        <result column="OLDXSD" jdbcType="OTHER" property="oldxsd"/>
+        <result column="MODELTYPE" jdbcType="DECIMAL" property="modeltype"/>
+        <result column="SEALPRINT" jdbcType="DECIMAL" property="sealprint"/>
+        <result column="LEGALCALL" jdbcType="DECIMAL" property="legalcall"/>
+        <result column="MINTYPEID" jdbcType="VARCHAR" property="mintypeid"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.sunnada.pojo.LicenseWithBLOBs">
+        <result column="XSD" jdbcType="CLOB" property="xsd"/>
+        <result column="XMLSAMPLE" jdbcType="CLOB" property="xmlsample"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, NAME, OWNERTYPE, TABLENAME, CODE, SERIALNUMBERFORMAT, SERIALNUMBERFORMATREGEX, 
+    CATEGORY, ORGANIZATIONID, PRINTPAGEINDEXS, VERSIONS, CREATER, UPDATEUSER, AUTOSERIALNUMBER, 
+    TRANSPARENTSEAL, CREATETIME, UPDATETIME, ORGANIZATIONNAME, REMARK, FLAGS, OLDXSD, 
+    MODELTYPE, SEALPRINT, LEGALCALL, MINTYPEID
+  </sql>
+    <sql id="Blob_Column_List">
+    XSD, XMLSAMPLE
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="net.sunnada.pojo.LicenseExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from LICENSE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="net.sunnada.pojo.LicenseExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from LICENSE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from LICENSE
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from LICENSE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <delete id="deleteByExample" parameterType="net.sunnada.pojo.LicenseExample">
+        delete from LICENSE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="net.sunnada.pojo.LicenseWithBLOBs">
+    insert into LICENSE (ID, NAME, OWNERTYPE, 
+      TABLENAME, CODE, SERIALNUMBERFORMAT, 
+      SERIALNUMBERFORMATREGEX, CATEGORY, ORGANIZATIONID, 
+      PRINTPAGEINDEXS, VERSIONS, CREATER, 
+      UPDATEUSER, AUTOSERIALNUMBER, TRANSPARENTSEAL, 
+      CREATETIME, UPDATETIME, ORGANIZATIONNAME, 
+      REMARK, FLAGS, OLDXSD, 
+      MODELTYPE, SEALPRINT, LEGALCALL, 
+      MINTYPEID, XSD, XMLSAMPLE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{ownertype,jdbcType=DECIMAL}, 
+      #{tablename,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{serialnumberformat,jdbcType=VARCHAR}, 
+      #{serialnumberformatregex,jdbcType=VARCHAR}, #{category,jdbcType=DECIMAL}, #{organizationid,jdbcType=VARCHAR}, 
+      #{printpageindexs,jdbcType=VARCHAR}, #{versions,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{updateuser,jdbcType=VARCHAR}, #{autoserialnumber,jdbcType=DECIMAL}, #{transparentseal,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{organizationname,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{flags,jdbcType=DECIMAL}, #{oldxsd,jdbcType=OTHER}, 
+      #{modeltype,jdbcType=DECIMAL}, #{sealprint,jdbcType=DECIMAL}, #{legalcall,jdbcType=DECIMAL}, 
+      #{mintypeid,jdbcType=VARCHAR}, #{xsd,jdbcType=CLOB}, #{xmlsample,jdbcType=CLOB}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="net.sunnada.pojo.LicenseWithBLOBs">
+        insert into LICENSE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="ownertype != null">
+                OWNERTYPE,
+            </if>
+            <if test="tablename != null">
+                TABLENAME,
+            </if>
+            <if test="code != null">
+                CODE,
+            </if>
+            <if test="serialnumberformat != null">
+                SERIALNUMBERFORMAT,
+            </if>
+            <if test="serialnumberformatregex != null">
+                SERIALNUMBERFORMATREGEX,
+            </if>
+            <if test="category != null">
+                CATEGORY,
+            </if>
+            <if test="organizationid != null">
+                ORGANIZATIONID,
+            </if>
+            <if test="printpageindexs != null">
+                PRINTPAGEINDEXS,
+            </if>
+            <if test="versions != null">
+                VERSIONS,
+            </if>
+            <if test="creater != null">
+                CREATER,
+            </if>
+            <if test="updateuser != null">
+                UPDATEUSER,
+            </if>
+            <if test="autoserialnumber != null">
+                AUTOSERIALNUMBER,
+            </if>
+            <if test="transparentseal != null">
+                TRANSPARENTSEAL,
+            </if>
+            <if test="createtime != null">
+                CREATETIME,
+            </if>
+            <if test="updatetime != null">
+                UPDATETIME,
+            </if>
+            <if test="organizationname != null">
+                ORGANIZATIONNAME,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="flags != null">
+                FLAGS,
+            </if>
+            <if test="oldxsd != null">
+                OLDXSD,
+            </if>
+            <if test="modeltype != null">
+                MODELTYPE,
+            </if>
+            <if test="sealprint != null">
+                SEALPRINT,
+            </if>
+            <if test="legalcall != null">
+                LEGALCALL,
+            </if>
+            <if test="mintypeid != null">
+                MINTYPEID,
+            </if>
+            <if test="xsd != null">
+                XSD,
+            </if>
+            <if test="xmlsample != null">
+                XMLSAMPLE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="ownertype != null">
+                #{ownertype,jdbcType=DECIMAL},
+            </if>
+            <if test="tablename != null">
+                #{tablename,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="serialnumberformat != null">
+                #{serialnumberformat,jdbcType=VARCHAR},
+            </if>
+            <if test="serialnumberformatregex != null">
+                #{serialnumberformatregex,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=DECIMAL},
+            </if>
+            <if test="organizationid != null">
+                #{organizationid,jdbcType=VARCHAR},
+            </if>
+            <if test="printpageindexs != null">
+                #{printpageindexs,jdbcType=VARCHAR},
+            </if>
+            <if test="versions != null">
+                #{versions,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="updateuser != null">
+                #{updateuser,jdbcType=VARCHAR},
+            </if>
+            <if test="autoserialnumber != null">
+                #{autoserialnumber,jdbcType=DECIMAL},
+            </if>
+            <if test="transparentseal != null">
+                #{transparentseal,jdbcType=DECIMAL},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="organizationname != null">
+                #{organizationname,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="flags != null">
+                #{flags,jdbcType=DECIMAL},
+            </if>
+            <if test="oldxsd != null">
+                #{oldxsd,jdbcType=OTHER},
+            </if>
+            <if test="modeltype != null">
+                #{modeltype,jdbcType=DECIMAL},
+            </if>
+            <if test="sealprint != null">
+                #{sealprint,jdbcType=DECIMAL},
+            </if>
+            <if test="legalcall != null">
+                #{legalcall,jdbcType=DECIMAL},
+            </if>
+            <if test="mintypeid != null">
+                #{mintypeid,jdbcType=VARCHAR},
+            </if>
+            <if test="xsd != null">
+                #{xsd,jdbcType=CLOB},
+            </if>
+            <if test="xmlsample != null">
+                #{xmlsample,jdbcType=CLOB},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="net.sunnada.pojo.LicenseExample" resultType="java.lang.Long">
+        select count(*) from LICENSE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update LICENSE
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=DECIMAL},
+            </if>
+            <if test="record.name != null">
+                NAME = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ownertype != null">
+                OWNERTYPE = #{record.ownertype,jdbcType=DECIMAL},
+            </if>
+            <if test="record.tablename != null">
+                TABLENAME = #{record.tablename,jdbcType=VARCHAR},
+            </if>
+            <if test="record.code != null">
+                CODE = #{record.code,jdbcType=VARCHAR},
+            </if>
+            <if test="record.serialnumberformat != null">
+                SERIALNUMBERFORMAT = #{record.serialnumberformat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.serialnumberformatregex != null">
+                SERIALNUMBERFORMATREGEX = #{record.serialnumberformatregex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.category != null">
+                CATEGORY = #{record.category,jdbcType=DECIMAL},
+            </if>
+            <if test="record.organizationid != null">
+                ORGANIZATIONID = #{record.organizationid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.printpageindexs != null">
+                PRINTPAGEINDEXS = #{record.printpageindexs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.versions != null">
+                VERSIONS = #{record.versions,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creater != null">
+                CREATER = #{record.creater,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateuser != null">
+                UPDATEUSER = #{record.updateuser,jdbcType=VARCHAR},
+            </if>
+            <if test="record.autoserialnumber != null">
+                AUTOSERIALNUMBER = #{record.autoserialnumber,jdbcType=DECIMAL},
+            </if>
+            <if test="record.transparentseal != null">
+                TRANSPARENTSEAL = #{record.transparentseal,jdbcType=DECIMAL},
+            </if>
+            <if test="record.createtime != null">
+                CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updatetime != null">
+                UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.organizationname != null">
+                ORGANIZATIONNAME = #{record.organizationname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                REMARK = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.flags != null">
+                FLAGS = #{record.flags,jdbcType=DECIMAL},
+            </if>
+            <if test="record.oldxsd != null">
+                OLDXSD = #{record.oldxsd,jdbcType=OTHER},
+            </if>
+            <if test="record.modeltype != null">
+                MODELTYPE = #{record.modeltype,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sealprint != null">
+                SEALPRINT = #{record.sealprint,jdbcType=DECIMAL},
+            </if>
+            <if test="record.legalcall != null">
+                LEGALCALL = #{record.legalcall,jdbcType=DECIMAL},
+            </if>
+            <if test="record.mintypeid != null">
+                MINTYPEID = #{record.mintypeid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.xsd != null">
+                XSD = #{record.xsd,jdbcType=CLOB},
+            </if>
+            <if test="record.xmlsample != null">
+                XMLSAMPLE = #{record.xmlsample,jdbcType=CLOB},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update LICENSE
+        set ID = #{record.id,jdbcType=DECIMAL},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        OWNERTYPE = #{record.ownertype,jdbcType=DECIMAL},
+        TABLENAME = #{record.tablename,jdbcType=VARCHAR},
+        CODE = #{record.code,jdbcType=VARCHAR},
+        SERIALNUMBERFORMAT = #{record.serialnumberformat,jdbcType=VARCHAR},
+        SERIALNUMBERFORMATREGEX = #{record.serialnumberformatregex,jdbcType=VARCHAR},
+        CATEGORY = #{record.category,jdbcType=DECIMAL},
+        ORGANIZATIONID = #{record.organizationid,jdbcType=VARCHAR},
+        PRINTPAGEINDEXS = #{record.printpageindexs,jdbcType=VARCHAR},
+        VERSIONS = #{record.versions,jdbcType=VARCHAR},
+        CREATER = #{record.creater,jdbcType=VARCHAR},
+        UPDATEUSER = #{record.updateuser,jdbcType=VARCHAR},
+        AUTOSERIALNUMBER = #{record.autoserialnumber,jdbcType=DECIMAL},
+        TRANSPARENTSEAL = #{record.transparentseal,jdbcType=DECIMAL},
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+        ORGANIZATIONNAME = #{record.organizationname,jdbcType=VARCHAR},
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+        FLAGS = #{record.flags,jdbcType=DECIMAL},
+        OLDXSD = #{record.oldxsd,jdbcType=OTHER},
+        MODELTYPE = #{record.modeltype,jdbcType=DECIMAL},
+        SEALPRINT = #{record.sealprint,jdbcType=DECIMAL},
+        LEGALCALL = #{record.legalcall,jdbcType=DECIMAL},
+        MINTYPEID = #{record.mintypeid,jdbcType=VARCHAR},
+        XSD = #{record.xsd,jdbcType=CLOB},
+        XMLSAMPLE = #{record.xmlsample,jdbcType=CLOB}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update LICENSE
+        set ID = #{record.id,jdbcType=DECIMAL},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        OWNERTYPE = #{record.ownertype,jdbcType=DECIMAL},
+        TABLENAME = #{record.tablename,jdbcType=VARCHAR},
+        CODE = #{record.code,jdbcType=VARCHAR},
+        SERIALNUMBERFORMAT = #{record.serialnumberformat,jdbcType=VARCHAR},
+        SERIALNUMBERFORMATREGEX = #{record.serialnumberformatregex,jdbcType=VARCHAR},
+        CATEGORY = #{record.category,jdbcType=DECIMAL},
+        ORGANIZATIONID = #{record.organizationid,jdbcType=VARCHAR},
+        PRINTPAGEINDEXS = #{record.printpageindexs,jdbcType=VARCHAR},
+        VERSIONS = #{record.versions,jdbcType=VARCHAR},
+        CREATER = #{record.creater,jdbcType=VARCHAR},
+        UPDATEUSER = #{record.updateuser,jdbcType=VARCHAR},
+        AUTOSERIALNUMBER = #{record.autoserialnumber,jdbcType=DECIMAL},
+        TRANSPARENTSEAL = #{record.transparentseal,jdbcType=DECIMAL},
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+        ORGANIZATIONNAME = #{record.organizationname,jdbcType=VARCHAR},
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+        FLAGS = #{record.flags,jdbcType=DECIMAL},
+        OLDXSD = #{record.oldxsd,jdbcType=OTHER},
+        MODELTYPE = #{record.modeltype,jdbcType=DECIMAL},
+        SEALPRINT = #{record.sealprint,jdbcType=DECIMAL},
+        LEGALCALL = #{record.legalcall,jdbcType=DECIMAL},
+        MINTYPEID = #{record.mintypeid,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="net.sunnada.pojo.LicenseWithBLOBs">
+        update LICENSE
+        <set>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="ownertype != null">
+                OWNERTYPE = #{ownertype,jdbcType=DECIMAL},
+            </if>
+            <if test="tablename != null">
+                TABLENAME = #{tablename,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="serialnumberformat != null">
+                SERIALNUMBERFORMAT = #{serialnumberformat,jdbcType=VARCHAR},
+            </if>
+            <if test="serialnumberformatregex != null">
+                SERIALNUMBERFORMATREGEX = #{serialnumberformatregex,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                CATEGORY = #{category,jdbcType=DECIMAL},
+            </if>
+            <if test="organizationid != null">
+                ORGANIZATIONID = #{organizationid,jdbcType=VARCHAR},
+            </if>
+            <if test="printpageindexs != null">
+                PRINTPAGEINDEXS = #{printpageindexs,jdbcType=VARCHAR},
+            </if>
+            <if test="versions != null">
+                VERSIONS = #{versions,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                CREATER = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="updateuser != null">
+                UPDATEUSER = #{updateuser,jdbcType=VARCHAR},
+            </if>
+            <if test="autoserialnumber != null">
+                AUTOSERIALNUMBER = #{autoserialnumber,jdbcType=DECIMAL},
+            </if>
+            <if test="transparentseal != null">
+                TRANSPARENTSEAL = #{transparentseal,jdbcType=DECIMAL},
+            </if>
+            <if test="createtime != null">
+                CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="organizationname != null">
+                ORGANIZATIONNAME = #{organizationname,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="flags != null">
+                FLAGS = #{flags,jdbcType=DECIMAL},
+            </if>
+            <if test="oldxsd != null">
+                OLDXSD = #{oldxsd,jdbcType=OTHER},
+            </if>
+            <if test="modeltype != null">
+                MODELTYPE = #{modeltype,jdbcType=DECIMAL},
+            </if>
+            <if test="sealprint != null">
+                SEALPRINT = #{sealprint,jdbcType=DECIMAL},
+            </if>
+            <if test="legalcall != null">
+                LEGALCALL = #{legalcall,jdbcType=DECIMAL},
+            </if>
+            <if test="mintypeid != null">
+                MINTYPEID = #{mintypeid,jdbcType=VARCHAR},
+            </if>
+            <if test="xsd != null">
+                XSD = #{xsd,jdbcType=CLOB},
+            </if>
+            <if test="xmlsample != null">
+                XMLSAMPLE = #{xmlsample,jdbcType=CLOB},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.sunnada.pojo.LicenseWithBLOBs">
+    update LICENSE
+    set NAME = #{name,jdbcType=VARCHAR},
+      OWNERTYPE = #{ownertype,jdbcType=DECIMAL},
+      TABLENAME = #{tablename,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      SERIALNUMBERFORMAT = #{serialnumberformat,jdbcType=VARCHAR},
+      SERIALNUMBERFORMATREGEX = #{serialnumberformatregex,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=DECIMAL},
+      ORGANIZATIONID = #{organizationid,jdbcType=VARCHAR},
+      PRINTPAGEINDEXS = #{printpageindexs,jdbcType=VARCHAR},
+      VERSIONS = #{versions,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      UPDATEUSER = #{updateuser,jdbcType=VARCHAR},
+      AUTOSERIALNUMBER = #{autoserialnumber,jdbcType=DECIMAL},
+      TRANSPARENTSEAL = #{transparentseal,jdbcType=DECIMAL},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      ORGANIZATIONNAME = #{organizationname,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      FLAGS = #{flags,jdbcType=DECIMAL},
+      OLDXSD = #{oldxsd,jdbcType=OTHER},
+      MODELTYPE = #{modeltype,jdbcType=DECIMAL},
+      SEALPRINT = #{sealprint,jdbcType=DECIMAL},
+      LEGALCALL = #{legalcall,jdbcType=DECIMAL},
+      MINTYPEID = #{mintypeid,jdbcType=VARCHAR},
+      XSD = #{xsd,jdbcType=CLOB},
+      XMLSAMPLE = #{xmlsample,jdbcType=CLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="net.sunnada.pojo.License">
+    update LICENSE
+    set NAME = #{name,jdbcType=VARCHAR},
+      OWNERTYPE = #{ownertype,jdbcType=DECIMAL},
+      TABLENAME = #{tablename,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      SERIALNUMBERFORMAT = #{serialnumberformat,jdbcType=VARCHAR},
+      SERIALNUMBERFORMATREGEX = #{serialnumberformatregex,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=DECIMAL},
+      ORGANIZATIONID = #{organizationid,jdbcType=VARCHAR},
+      PRINTPAGEINDEXS = #{printpageindexs,jdbcType=VARCHAR},
+      VERSIONS = #{versions,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      UPDATEUSER = #{updateuser,jdbcType=VARCHAR},
+      AUTOSERIALNUMBER = #{autoserialnumber,jdbcType=DECIMAL},
+      TRANSPARENTSEAL = #{transparentseal,jdbcType=DECIMAL},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      ORGANIZATIONNAME = #{organizationname,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      FLAGS = #{flags,jdbcType=DECIMAL},
+      OLDXSD = #{oldxsd,jdbcType=OTHER},
+      MODELTYPE = #{modeltype,jdbcType=DECIMAL},
+      SEALPRINT = #{sealprint,jdbcType=DECIMAL},
+      LEGALCALL = #{legalcall,jdbcType=DECIMAL},
+      MINTYPEID = #{mintypeid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

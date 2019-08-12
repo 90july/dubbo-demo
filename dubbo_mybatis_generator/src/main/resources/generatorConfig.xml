@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="testTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+        <!--connectionURL="jdbc:mysql://localhost:3306/tmall"-->
+        <!--userId="root" password="root">-->
+        <!--</jdbcConnection>-->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@192.168.168.6:1521:gorcl"
+                        userId="electriclicense"
+                        password="electriclicense">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <!--<javaTypeResolver type="">-->
+        <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver>-->
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.sunnada.licensesharestatic.entity"
+                            targetProject="D:\IdeaProjects\workspace\licensesharestatic\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="mybatis_mapper"
+                         targetProject="D:\IdeaProjects\workspace\licensesharestatic\src\main\resources">
+            <!--targetProject="..\generatorSqlmapCustom\src">-->
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.sunnada.licensesharestatic.idao"
+                             targetProject="D:\IdeaProjects\workspace\licensesharestatic\src\main\java">
+            <!--targetProject="..\generatorSqlmapCustom\src">-->
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+        <table tableName="STATIC_CATALOG" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_COUNTRY" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_DIRECTDEPARTMENT" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_GENERATETYPE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_LICENSECATEGORY " enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_LICENSESHAREDATALOG" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_LICENSESORT" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_LICENSESOURCE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_LICENSEYEAR" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_MO_BUSINESS_SYS_INFO" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_MO_CERDATA" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_MO_OVERALL" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_OVERVIEW" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_REALTIMEGENERATION" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_REALTIMESHARE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_REG_ORG" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_SYSTEMAPPLAY" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_TOTAL" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_TOTAL_TEMP" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_GENERATECATEGORY" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_GENERATETOTAL" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_GENERATETYPE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_LICENSECATEGORY" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_LICENSESORT" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_LICENSESOURCE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_LICENSEYEAR" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_REALTIMEGENERATE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_REALTIMESHARE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_REGISTCATEGORY" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_REGORGOVERVIEW" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_SHAREDATALOG" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_SHARETOTAL" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIC_VIEW_SYSTEMAPPLAY" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIS_AREA_LICENSE_TYPE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIS_AREA_ORG" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+        <table tableName="STATIS_AREA_SHARE" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"/>
+    </context>
+</generatorConfiguration>

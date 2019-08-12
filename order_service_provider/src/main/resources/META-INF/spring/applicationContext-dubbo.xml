@@ -1,0 +1,16 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="order_service_provider"/>
+    <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper"/>
+    <dubbo:annotation package="net.sunnada.service.impl"/>
+    <import resource="classpath:applicationContext-spring.xml"/>
+    <!--表示从注册中心发现监控中心地址-->
+    <dubbo:monitor protocol="registry"/>
+    <dubbo:consumer retries="0"/>
+</beans>

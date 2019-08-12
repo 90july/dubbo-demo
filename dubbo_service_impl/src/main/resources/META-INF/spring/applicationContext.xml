@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--给当前provider自定义个名字-->
+    <!--dubbo:application   给provide起名，在monitor或管理工具中区别是哪个provider-->
+    <dubbo:application name="dubbo-service"/>
+    <!--配置注册中心-->
+    <!--dubbo:registry      address：注册中心的ip和端口      protocol:使用哪种注册中心-->
+    <dubbo:registry address="192.168.168.102:2181" protocol="zookeeper"/>
+    <!--配置协议:provider占用当前计算机的端口-->
+    <!--dubbo:protocol  name:使用什么协议     port：consumer调用provider时的端口号-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!--注册功能-->
+    <!--dubbo:service   注册接口    ref：引用接口实现类<bean>的id值-->
+    <bean id="demoServiceImpl" class="net.sunnada.dubbo.service.impl.DemoServiceImpl"/>
+    <dubbo:service interface="net.sunnada.dubbo.service.DemoService" ref="demoServiceImpl"/>
+    <!--dubbo@service注解与spring@service注解冲突,不可能不要声明式事务-->
+    <!--<dubbo:annotation package="net.sunnada.service.impl"/>-->
+    <!--启动容器
+        通过spring方式启动
+            applicationContext.xml位置没有要求
+        使用dubbo提供的方法启动
+            要求applicationContext.xml必须放在类路径下/META-INF/spring/*.xml
+    -->
+</beans>
